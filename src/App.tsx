@@ -10,24 +10,16 @@ import { Navbar } from './components/Navbar';
 import { TypingHeadline } from './components/TypingHeadline';
 import { ProjectCard } from './components/ProjectCard';
 import { ProjectDetailPage } from './components/ProjectDetailPage';
-import { ReadmePage } from './components/ReadmePage';
 import { ExperienceSection } from './components/ExperienceSection';
 import { SkillsSection } from './components/SkillsSection';
 import { CredentialsSection } from './components/CredentialsSection';
 import { ContactFooter } from './components/ContactFooter';
 
-function getRouteStateFromUrl(): { projectSlug: string | null; isReadme: boolean } {
+function getProjectSlugFromUrl(): string | null {
   const params = new URLSearchParams(window.location.search);
-  const page = params.get('page')?.trim().toLowerCase();
   const slug = params.get('project')?.trim().toLowerCase() || null;
-  if (page === 'readme' || window.location.hash.toLowerCase() === '#/readme') {
-    return { projectSlug: null, isReadme: true };
-  }
   const hashMatch = window.location.hash.match(/^#\/project\/([a-z0-9-]+)$/i);
-  return {
-    projectSlug: slug || (hashMatch ? hashMatch[1].toLowerCase() : null),
-    isReadme: false,
-  };
+  return slug || (hashMatch ? hashMatch[1].toLowerCase() : null);
 }
 
 export default function App() {
@@ -44,7 +36,9 @@ export default function App() {
 
   const [headshotError, setHeadshotError] = useState(false);
 
-  const [routeState, setRouteState] = useState(() => getRouteStateFromUrl());
+  const [projectSlug, setProjectSlug] = useState<string | null>(() =>
+    getProjectSlugFromUrl()
+  );
 
   useEffect(() => {
     const root = document.documentElement;
@@ -62,7 +56,7 @@ export default function App() {
 
   useEffect(() => {
     const onPopState = () => {
-      setRouteState(getRouteStateFromUrl());
+      setProjectSlug(getProjectSlugFromUrl());
     };
     window.addEventListener('popstate', onPopState);
     window.addEventListener('hashchange', onPopState);
@@ -72,19 +66,17 @@ export default function App() {
     };
   }, []);
 
-  const selectedProduct = routeState.projectSlug
-    ? PRODUCTS.find((p) => p.slug.toLowerCase() === routeState.projectSlug)
+  const selectedProduct = projectSlug
+    ? PRODUCTS.find((p) => p.slug.toLowerCase() === projectSlug)
     : undefined;
 
   useEffect(() => {
-    if (routeState.isReadme) {
-      document.title = `README — ${PROFILE.name}`;
-    } else if (selectedProduct) {
+    if (selectedProduct) {
       document.title = `${selectedProduct.name} — ${PROFILE.name}`;
     } else {
       document.title = `${PROFILE.name} — Product Manager Portfolio`;
     }
-  }, [routeState.isReadme, selectedProduct]);
+  }, [selectedProduct]);
 
   const handleBackHome = () => {
     const url = new URL(window.location.href);
@@ -92,34 +84,9 @@ export default function App() {
     url.searchParams.delete('page');
     url.hash = '';
     window.history.pushState({}, '', url.toString());
-    setRouteState({ projectSlug: null, isReadme: false });
+    setProjectSlug(null);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-
-  const handleOpenReadme = () => {
-    const url = new URL(window.location.href);
-    url.searchParams.delete('project');
-    url.searchParams.set('page', 'readme');
-    url.hash = '';
-    window.history.pushState({}, '', url.toString());
-    setRouteState({ projectSlug: null, isReadme: true });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  if (routeState.isReadme) {
-    return (
-      <div className="min-h-screen bg-[#F8FAFC] text-slate-900 dark:bg-[#060911] dark:text-slate-100">
-        <Navbar
-          isDark={isDark}
-          onToggleTheme={() => setIsDark((prev) => !prev)}
-          isSubPage
-          onBackHome={handleBackHome}
-        />
-        <ReadmePage onBackHome={handleBackHome} />
-        <ContactFooter />
-      </div>
-    );
-  }
 
   if (selectedProduct) {
     return (
@@ -144,7 +111,6 @@ export default function App() {
       <Navbar
         isDark={isDark}
         onToggleTheme={() => setIsDark((prev) => !prev)}
-        onOpenReadme={handleOpenReadme}
       />
 
       <main>
@@ -174,7 +140,7 @@ export default function App() {
                   <a
                     href={PROFILE.resumeUrl}
                     download={PROFILE.resumeDownloadName}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 dark:bg-emerald-500 hover:bg-slate-800 dark:hover:bg-emerald-400 text-white dark:text-slate-950 text-sm font-semibold transition-colors whitespace-nowrap shrink-0"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 dark:bg-emerald-500 hover:bg-slate-800 dark:hover:bg-emerald-400 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-500/15 text-white dark:text-slate-950 text-sm font-semibold transition-all duration-200 whitespace-nowrap shrink-0"
                   >
                     <Download className="w-4 h-4" />
                     <span>Resume (PDF)</span>
@@ -183,7 +149,7 @@ export default function App() {
                     href={PROFILE.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-200 dark:border-white/[0.1] bg-white dark:bg-[#0D131F] hover:bg-slate-100 dark:hover:bg-[#141D2F] text-slate-800 dark:text-slate-100 text-sm font-medium transition-colors whitespace-nowrap shrink-0"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-200 dark:border-white/[0.1] bg-white dark:bg-[#0D131F] hover:bg-slate-100 dark:hover:bg-[#141D2F] hover:border-emerald-500/45 hover:-translate-y-0.5 text-slate-800 dark:text-slate-100 text-sm font-medium transition-all duration-200 whitespace-nowrap shrink-0"
                   >
                     <Linkedin className="w-4 h-4" />
                     <span>LinkedIn</span>
@@ -192,14 +158,14 @@ export default function App() {
                     href={PROFILE.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-200 dark:border-white/[0.1] bg-white dark:bg-[#0D131F] hover:bg-slate-100 dark:hover:bg-[#141D2F] text-slate-800 dark:text-slate-100 text-sm font-medium transition-colors whitespace-nowrap shrink-0"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-200 dark:border-white/[0.1] bg-white dark:bg-[#0D131F] hover:bg-slate-100 dark:hover:bg-[#141D2F] hover:border-emerald-500/45 hover:-translate-y-0.5 text-slate-800 dark:text-slate-100 text-sm font-medium transition-all duration-200 whitespace-nowrap shrink-0"
                   >
                     <Github className="w-4 h-4" />
                     <span>GitHub</span>
                   </a>
                   <a
                     href={`mailto:${PROFILE.email}`}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-200 dark:border-white/[0.1] bg-white dark:bg-[#0D131F] hover:bg-slate-100 dark:hover:bg-[#141D2F] text-slate-800 dark:text-slate-100 text-sm font-medium transition-colors whitespace-nowrap shrink-0"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-200 dark:border-white/[0.1] bg-white dark:bg-[#0D131F] hover:bg-slate-100 dark:hover:bg-[#141D2F] hover:border-emerald-500/45 hover:-translate-y-0.5 text-slate-800 dark:text-slate-100 text-sm font-medium transition-all duration-200 whitespace-nowrap shrink-0"
                   >
                     <Mail className="w-4 h-4" />
                     <span>Email</span>
@@ -209,7 +175,7 @@ export default function App() {
 
               {/* Right Column: Prominent Circular Portrait matching reference layout */}
               <div className="lg:col-span-4 flex justify-center lg:justify-end">
-                <div className="relative w-56 h-56 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-full p-1.5 bg-gradient-to-b from-slate-200 to-slate-300 dark:from-white/[0.16] dark:to-white/[0.04] shadow-2xl">
+                <div className="relative w-56 h-56 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-full p-1.5 bg-gradient-to-b from-slate-200 to-slate-300 dark:from-white/[0.16] dark:to-white/[0.04] shadow-2xl transition-all duration-300 hover:scale-[1.02] hover:from-emerald-400/50 hover:to-emerald-600/20 hover:shadow-[0_0_40px_-10px_rgba(16,185,129,0.35)]">
                   {headshotError ? (
                     <div
                       aria-label={PROFILE.name}
@@ -235,7 +201,7 @@ export default function App() {
               {DOMAIN_PILLARS.map((pillar) => (
                 <div
                   key={pillar.index}
-                  className="rounded-2xl border border-slate-200 dark:border-white/[0.08] bg-white/95 dark:bg-[#0D131F]/95 dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] p-5 space-y-1.5"
+                  className="rounded-2xl border border-slate-200 dark:border-white/[0.08] bg-white/95 dark:bg-[#0D131F]/95 dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] p-5 space-y-1.5 transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-500/45 hover:shadow-md"
                 >
                   <div className="flex items-baseline gap-2">
                     <span className="font-mono text-xs text-emerald-700 dark:text-emerald-400 tabular-nums">
@@ -257,7 +223,7 @@ export default function App() {
               {KEY_HIGHLIGHTS.map((item) => (
                 <div
                   key={item.label}
-                  className="rounded-2xl border border-slate-200 dark:border-white/[0.08] bg-white/90 dark:bg-[#0D131F]/90 dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] p-5"
+                  className="rounded-2xl border border-slate-200 dark:border-white/[0.08] bg-white/90 dark:bg-[#0D131F]/90 dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-500/45 hover:shadow-md"
                 >
                   <div className="font-display text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tabular-nums">
                     {item.value}

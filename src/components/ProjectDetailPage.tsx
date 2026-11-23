@@ -56,7 +56,7 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
             href={product.demoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-slate-900 dark:bg-emerald-500 hover:bg-slate-800 dark:hover:bg-emerald-400 text-white dark:text-slate-950 text-sm font-semibold transition-colors whitespace-nowrap shrink-0"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-slate-900 dark:bg-emerald-500 hover:bg-slate-800 dark:hover:bg-emerald-400 hover:-translate-y-0.5 text-white dark:text-slate-950 text-sm font-semibold transition-all duration-200 whitespace-nowrap shrink-0"
           >
             <span>Open Working Demo</span>
             <ExternalLink className="w-4 h-4" />
@@ -67,7 +67,7 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
               href={product.secondaryDemoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-slate-200 dark:border-white/[0.1] bg-white dark:bg-[#0D131F] hover:bg-slate-100 dark:hover:bg-[#141D2F] text-slate-800 dark:text-slate-200 text-sm font-medium transition-colors whitespace-nowrap shrink-0"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-slate-200 dark:border-white/[0.1] bg-white dark:bg-[#0D131F] hover:bg-slate-100 dark:hover:bg-[#141D2F] hover:border-emerald-500/40 hover:-translate-y-0.5 text-slate-800 dark:text-slate-200 text-sm font-medium transition-all duration-200 whitespace-nowrap shrink-0"
             >
               <span>GitHub Pages Mirror</span>
               <ExternalLink className="w-4 h-4" />
@@ -78,7 +78,7 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
             href={product.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-slate-200 dark:border-white/[0.1] bg-white dark:bg-[#0D131F] hover:bg-slate-100 dark:hover:bg-[#141D2F] text-slate-800 dark:text-slate-200 text-sm font-medium transition-colors whitespace-nowrap shrink-0"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-slate-200 dark:border-white/[0.1] bg-white dark:bg-[#0D131F] hover:bg-slate-100 dark:hover:bg-[#141D2F] hover:border-emerald-500/40 hover:-translate-y-0.5 text-slate-800 dark:text-slate-200 text-sm font-medium transition-all duration-200 whitespace-nowrap shrink-0"
           >
             <Github className="w-4 h-4" />
             <span>GitHub Repository</span>
@@ -165,7 +165,7 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
 
       {/* Problem & Overview */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-slate-200 dark:border-white/[0.08]">
-        <div className="rounded-xl border border-slate-200 dark:border-white/[0.08] bg-white dark:bg-[#0D131F] p-6 space-y-3">
+        <div className="rounded-xl border border-slate-200 dark:border-white/[0.08] bg-white dark:bg-[#0D131F] p-6 space-y-3 transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-500/40">
           <h2 className="font-display text-lg font-semibold text-slate-900 dark:text-white">
             Problem Addressed
           </h2>
@@ -174,7 +174,7 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
           </p>
         </div>
 
-        <div className="rounded-xl border border-slate-200 dark:border-white/[0.08] bg-white dark:bg-[#0D131F] p-6 space-y-3">
+        <div className="rounded-xl border border-slate-200 dark:border-white/[0.08] bg-white dark:bg-[#0D131F] p-6 space-y-3 transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-500/40">
           <h2 className="font-display text-lg font-semibold text-slate-900 dark:text-white">
             Product Overview
           </h2>
@@ -197,7 +197,7 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
           {product.userPersonas.map((persona) => (
             <div
               key={persona.title}
-              className="rounded-xl border border-slate-200 dark:border-white/[0.08] bg-white dark:bg-[#0D131F] p-6 space-y-3"
+              className="rounded-xl border border-slate-200 dark:border-white/[0.08] bg-white dark:bg-[#0D131F] p-6 space-y-3 transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-500/40"
             >
               <div className="flex items-center justify-between gap-2 text-xs font-mono">
                 <span className="text-emerald-700 dark:text-emerald-400 font-medium">
@@ -238,7 +238,7 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
           {product.modules.map((mod, idx) => (
             <div
               key={mod.title}
-              className="rounded-xl border border-slate-200 dark:border-white/[0.08] bg-white dark:bg-[#0D131F] p-6 space-y-3"
+              className="rounded-xl border border-slate-200 dark:border-white/[0.08] bg-white dark:bg-[#0D131F] p-6 space-y-3 transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-500/40"
             >
               <div className="text-xs font-mono text-emerald-700 dark:text-emerald-400 tabular-nums">
                 Module 0{idx + 1}

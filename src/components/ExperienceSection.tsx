@@ -22,7 +22,7 @@ export const ExperienceSection: React.FC = () => {
           {EXPERIENCES.map((exp) => (
             <article
               key={exp.id}
-              className="rounded-2xl border border-slate-200 dark:border-white/[0.08] bg-white dark:bg-[#0D131F] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] p-6 sm:p-8"
+              className="rounded-2xl border border-slate-200 dark:border-white/[0.08] bg-white dark:bg-[#0D131F] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] p-6 sm:p-8 transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-500/40 hover:shadow-md"
             >
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10">
                 {/* Left Editorial Role Column */}
@@ -62,7 +62,7 @@ export const ExperienceSection: React.FC = () => {
           ))}
 
           {/* Hackathon Recognition from Resume */}
-          <article className="rounded-2xl border border-slate-200 dark:border-white/[0.08] bg-white dark:bg-[#0D131F] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] p-6 sm:p-7 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <article className="rounded-2xl border border-slate-200 dark:border-white/[0.08] bg-white dark:bg-[#0D131F] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] p-6 sm:p-7 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-500/40 hover:shadow-md">
             <div className="space-y-1.5 max-w-3xl">
               <div className="text-xs font-mono font-medium text-emerald-700 dark:text-emerald-400">
                 Hackathon Recognition
@@ -78,7 +78,7 @@ export const ExperienceSection: React.FC = () => {
               href={HACKATHON.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-slate-200 dark:border-white/[0.1] bg-slate-50 dark:bg-[#121A2A] hover:bg-slate-100 dark:hover:bg-[#182338] text-slate-800 dark:text-slate-100 text-xs sm:text-sm font-medium transition-colors whitespace-nowrap shrink-0 self-start sm:self-center"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-slate-200 dark:border-white/[0.1] bg-slate-50 dark:bg-[#121A2A] hover:bg-slate-100 dark:hover:bg-[#182338] hover:border-emerald-500/40 hover:-translate-y-0.5 text-slate-800 dark:text-slate-100 text-xs sm:text-sm font-medium transition-all duration-200 whitespace-nowrap shrink-0 self-start sm:self-center"
             >
               <span>View Project</span>
               <ExternalLink className="w-3.5 h-3.5" />

@@ -392,23 +392,23 @@ export const PRODUCTS: ProductItem[] = [
     screens: [
       {
         id: 'landing-hero',
-        label: 'Landing Hero',
-        caption: 'Compass landing page hero ("Stop guessing your MBA career. Decide with empirical certainty.") with Precision Live Job Search release banner and primary CTAs.',
+        label: 'Landing Page',
+        caption: 'Compass landing page ("Stop guessing your MBA career. Decide with empirical certainty.") with Precision Live Job Search release banner.',
       },
       {
         id: 'landing-traps',
-        label: '6 MBA Traps',
-        caption: 'Landing page section: "Designed backwards from the 6 traps that derail MBA candidates" covering ATS screening, XYZ bullets, and outreach silence.',
+        label: 'Challenges Solved',
+        caption: 'Core MBA placement challenges solved across specialization clarity, ATS screening, XYZ bullets, and cold outreach.',
       },
       {
         id: 'landing-sim',
-        label: 'Interactive Simulators',
-        caption: 'Landing page browser simulator: "Test four core engines right in your browser" (Behavioral Matcher, XYZ Bullet Validator, Cold Outreach, Strict Job Filter).',
+        label: 'Live Simulators',
+        caption: 'Interactive browser sandbox: Behavioral Matcher, XYZ Bullet Validator, Cold Outreach, and Strict Job Filter.',
       },
       {
         id: 'landing-modules',
-        label: '7-Module Showcase',
-        caption: 'Landing page overview: "Seven synchronized modules for the complete placement cycle" and MBA candidate journey personas.',
+        label: 'Placement Modules',
+        caption: 'Overview of the 7 synchronized placement modules and MBA candidate journey personas.',
       },
     ],
     faqs: [
@@ -568,8 +568,8 @@ export const PRODUCTS: ProductItem[] = [
     screens: [
       {
         id: 'landing-hero',
-        label: 'Landing Hero',
-        caption: 'SignalIQ landing page hero ("Turn Customer Chaos Into Metric-Backed Product Roadmaps") with navigation, Sign In, and Get Started Free CTA.',
+        label: 'Landing Page',
+        caption: 'SignalIQ landing page ("Turn Customer Chaos Into Metric-Backed Product Roadmaps") with navigation, Sign In, and Get Started Free CTA.',
       },
       {
         id: 'landing-capabilities',
@@ -578,7 +578,7 @@ export const PRODUCTS: ProductItem[] = [
       },
       {
         id: 'landing-usecases',
-        label: 'Stakeholder Use Cases',
+        label: 'Use Cases',
         caption: 'Landing page section: "Tailored For Every Product Stakeholder" covering Bug Detection, Data-Driven Sprint Backlogs, and Churn Prevention.',
       },
       {

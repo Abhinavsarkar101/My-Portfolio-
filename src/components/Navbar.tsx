@@ -6,7 +6,6 @@ interface NavbarProps {
   onToggleTheme: () => void;
   isSubPage?: boolean;
   onBackHome?: () => void;
-  onOpenReadme?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -14,7 +13,6 @@ export const Navbar: React.FC<NavbarProps> = ({
   onToggleTheme,
   isSubPage = false,
   onBackHome,
-  onOpenReadme,
 }) => {
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/80 dark:border-white/[0.07] bg-[#F8FAFC]/90 dark:bg-[#060911]/85 backdrop-blur-md">
@@ -37,13 +35,13 @@ export const Navbar: React.FC<NavbarProps> = ({
         ) : (
           <a
             href="#top"
-            className="font-display text-lg font-bold tracking-tight text-slate-900 dark:text-white whitespace-nowrap shrink-0"
+            className="font-display text-lg font-bold tracking-tight text-slate-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors whitespace-nowrap shrink-0"
           >
             Abhinav Sarkar
           </a>
         )}
 
-        {/* Zone 2: Clean single-line navigation links (5 links) */}
+        {/* Zone 2: Clean single-line navigation links */}
         {!isSubPage && (
           <nav
             aria-label="Primary navigation"
@@ -68,16 +66,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               Skills
             </a>
             <a
-              href="?page=readme"
-              onClick={(e) => {
-                if (onOpenReadme) {
-                  e.preventDefault();
-                  onOpenReadme();
-                }
-              }}
+              href="#credentials"
               className="hover:text-slate-900 dark:hover:text-emerald-400 transition-colors whitespace-nowrap shrink-0"
             >
-              README
+              Education
             </a>
             <a
               href="#contact"
@@ -94,7 +86,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             type="button"
             onClick={onToggleTheme}
             aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-            className="w-10 h-10 rounded-lg border border-slate-200 dark:border-white/[0.1] bg-white dark:bg-[#0D131F] text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-[#141D2F] flex items-center justify-center transition-colors cursor-pointer"
+            className="w-10 h-10 rounded-lg border border-slate-200 dark:border-white/[0.1] bg-white dark:bg-[#0D131F] text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-[#141D2F] hover:border-emerald-500/40 flex items-center justify-center transition-all duration-200 cursor-pointer"
           >
             {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>

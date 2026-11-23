@@ -21,7 +21,7 @@ export const SkillsSection: React.FC = () => {
           {SKILL_GROUPS.map((group) => (
             <div
               key={group.category}
-              className="rounded-2xl border border-slate-200 dark:border-white/[0.08] bg-white dark:bg-[#0D131F] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] p-6 transition-colors hover:border-emerald-500/40"
+              className="rounded-2xl border border-slate-200 dark:border-white/[0.08] bg-white dark:bg-[#0D131F] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-500/45 hover:shadow-md"
             >
               <h3 className="font-display text-base font-semibold text-slate-900 dark:text-white mb-4">
                 {group.category}
@@ -30,7 +30,7 @@ export const SkillsSection: React.FC = () => {
                 {group.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="inline-flex items-center rounded-full border border-slate-200 dark:border-white/[0.08] bg-slate-100 dark:bg-[#151E30] px-3.5 py-1.5 text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-200 transition-colors hover:border-emerald-500/40"
+                    className="inline-flex items-center rounded-full border border-slate-200 dark:border-white/[0.08] bg-slate-100 dark:bg-[#151E30] px-3.5 py-1.5 text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-200 transition-all duration-150 hover:border-emerald-500/50 hover:bg-emerald-500/10 hover:text-emerald-700 dark:hover:text-emerald-300"
                   >
                     {skill}
                   </span>
