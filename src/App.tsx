@@ -4,23 +4,30 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { ArrowDownRight, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowDownRight, Download, Github, Linkedin, Mail } from 'lucide-react';
 import { DOMAIN_PILLARS, KEY_HIGHLIGHTS, PRODUCTS, PROFILE } from './data/portfolioData';
 import { Navbar } from './components/Navbar';
 import { TypingHeadline } from './components/TypingHeadline';
 import { ProjectCard } from './components/ProjectCard';
 import { ProjectDetailPage } from './components/ProjectDetailPage';
+import { ReadmePage } from './components/ReadmePage';
 import { ExperienceSection } from './components/ExperienceSection';
 import { SkillsSection } from './components/SkillsSection';
 import { CredentialsSection } from './components/CredentialsSection';
 import { ContactFooter } from './components/ContactFooter';
 
-function getProjectSlugFromUrl(): string | null {
+function getRouteStateFromUrl(): { projectSlug: string | null; isReadme: boolean } {
   const params = new URLSearchParams(window.location.search);
-  const slug = params.get('project');
-  if (slug) return slug.trim().toLowerCase();
+  const page = params.get('page')?.trim().toLowerCase();
+  const slug = params.get('project')?.trim().toLowerCase() || null;
+  if (page === 'readme' || window.location.hash.toLowerCase() === '#/readme') {
+    return { projectSlug: null, isReadme: true };
+  }
   const hashMatch = window.location.hash.match(/^#\/project\/([a-z0-9-]+)$/i);
-  return hashMatch ? hashMatch[1].toLowerCase() : null;
+  return {
+    projectSlug: slug || (hashMatch ? hashMatch[1].toLowerCase() : null),
+    isReadme: false,
+  };
 }
 
 export default function App() {
@@ -35,9 +42,9 @@ export default function App() {
     return true;
   });
 
-  const [activeProjectSlug, setActiveProjectSlug] = useState<string | null>(() =>
-    getProjectSlugFromUrl()
-  );
+  const [headshotError, setHeadshotError] = useState(false);
+
+  const [routeState, setRouteState] = useState(() => getRouteStateFromUrl());
 
   useEffect(() => {
     const root = document.documentElement;
@@ -55,7 +62,7 @@ export default function App() {
 
   useEffect(() => {
     const onPopState = () => {
-      setActiveProjectSlug(getProjectSlugFromUrl());
+      setRouteState(getRouteStateFromUrl());
     };
     window.addEventListener('popstate', onPopState);
     window.addEventListener('hashchange', onPopState);
@@ -65,26 +72,54 @@ export default function App() {
     };
   }, []);
 
-  const selectedProduct = activeProjectSlug
-    ? PRODUCTS.find((p) => p.slug.toLowerCase() === activeProjectSlug)
+  const selectedProduct = routeState.projectSlug
+    ? PRODUCTS.find((p) => p.slug.toLowerCase() === routeState.projectSlug)
     : undefined;
 
   useEffect(() => {
-    if (selectedProduct) {
+    if (routeState.isReadme) {
+      document.title = `README — ${PROFILE.name}`;
+    } else if (selectedProduct) {
       document.title = `${selectedProduct.name} — ${PROFILE.name}`;
     } else {
       document.title = `${PROFILE.name} — Product Manager Portfolio`;
     }
-  }, [selectedProduct]);
+  }, [routeState.isReadme, selectedProduct]);
 
   const handleBackHome = () => {
     const url = new URL(window.location.href);
     url.searchParams.delete('project');
+    url.searchParams.delete('page');
     url.hash = '';
     window.history.pushState({}, '', url.toString());
-    setActiveProjectSlug(null);
+    setRouteState({ projectSlug: null, isReadme: false });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  const handleOpenReadme = () => {
+    const url = new URL(window.location.href);
+    url.searchParams.delete('project');
+    url.searchParams.set('page', 'readme');
+    url.hash = '';
+    window.history.pushState({}, '', url.toString());
+    setRouteState({ projectSlug: null, isReadme: true });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  if (routeState.isReadme) {
+    return (
+      <div className="min-h-screen bg-[#F8FAFC] text-slate-900 dark:bg-[#060911] dark:text-slate-100">
+        <Navbar
+          isDark={isDark}
+          onToggleTheme={() => setIsDark((prev) => !prev)}
+          isSubPage
+          onBackHome={handleBackHome}
+        />
+        <ReadmePage onBackHome={handleBackHome} />
+        <ContactFooter />
+      </div>
+    );
+  }
 
   if (selectedProduct) {
     return (
@@ -92,7 +127,7 @@ export default function App() {
         <Navbar
           isDark={isDark}
           onToggleTheme={() => setIsDark((prev) => !prev)}
-          isProjectPage
+          isSubPage
           onBackHome={handleBackHome}
         />
         <ProjectDetailPage product={selectedProduct} onBackHome={handleBackHome} />
@@ -106,10 +141,14 @@ export default function App() {
       id="top"
       className="min-h-screen bg-[#F8FAFC] text-slate-900 dark:bg-[#060911] dark:text-slate-100"
     >
-      <Navbar isDark={isDark} onToggleTheme={() => setIsDark((prev) => !prev)} />
+      <Navbar
+        isDark={isDark}
+        onToggleTheme={() => setIsDark((prev) => !prev)}
+        onOpenReadme={handleOpenReadme}
+      />
 
       <main>
-        {/* Executive Hero Split with Architectural Grid & Subtle Top Spotlight */}
+        {/* Executive Hero Split with Headshot, Typing Headline & Downloadable Resume */}
         <section className="relative overflow-hidden py-14 sm:py-20 lg:py-24 bg-architectural-grid">
           <div
             aria-hidden="true"
@@ -144,6 +183,14 @@ export default function App() {
                     <ArrowDownRight className="w-4 h-4" />
                   </a>
                   <a
+                    href={PROFILE.resumeUrl}
+                    download={PROFILE.resumeDownloadName}
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-emerald-600/40 dark:border-emerald-500/40 bg-emerald-50 dark:bg-emerald-500/10 hover:bg-emerald-100 dark:hover:bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 text-sm font-semibold transition-colors whitespace-nowrap shrink-0"
+                  >
+                    <Download className="w-4 h-4" />
+                    <span>Download Resume</span>
+                  </a>
+                  <a
                     href={PROFILE.github}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -171,15 +218,41 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Right Column: Executive Domain Pillars Card */}
+              {/* Right Column: Profile Headshot + Core Product Pillars */}
               <div className="lg:col-span-5 rounded-2xl border border-slate-200 dark:border-white/[0.08] bg-white/95 dark:bg-[#0D131F]/95 dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] p-6 sm:p-7 flex flex-col justify-between gap-5">
-                <div className="text-xs font-mono font-medium text-emerald-700 dark:text-emerald-400 uppercase tracking-wider">
-                  Core Product Pillars
+                <div className="flex items-center gap-4 pb-5 border-b border-slate-200 dark:border-white/[0.06]">
+                  {headshotError ? (
+                    <div
+                      aria-label={PROFILE.name}
+                      className="w-20 h-20 rounded-xl bg-slate-200 dark:bg-[#151E30] border border-slate-300 dark:border-white/10 flex items-center justify-center font-display text-xl font-bold text-slate-700 dark:text-emerald-400 shrink-0"
+                    >
+                      AS
+                    </div>
+                  ) : (
+                    <img
+                      src={PROFILE.headshotUrl}
+                      alt={`${PROFILE.name} headshot`}
+                      referrerPolicy="no-referrer"
+                      onError={() => setHeadshotError(true)}
+                      className="w-20 h-20 rounded-xl object-cover object-top border border-slate-200 dark:border-white/[0.12] shrink-0"
+                    />
+                  )}
+                  <div className="min-w-0">
+                    <div className="font-display text-lg font-bold text-slate-900 dark:text-white truncate">
+                      {PROFILE.name}
+                    </div>
+                    <div className="text-xs sm:text-sm font-medium text-emerald-700 dark:text-emerald-400 mt-0.5">
+                      {PROFILE.role}
+                    </div>
+                    <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                      {PROFILE.location}
+                    </div>
+                  </div>
                 </div>
 
                 <div className="divide-y divide-slate-200 dark:divide-white/[0.06] flex-1 flex flex-col justify-center">
                   {DOMAIN_PILLARS.map((pillar) => (
-                    <div key={pillar.index} className="py-4 first:pt-0 last:pb-0 space-y-1">
+                    <div key={pillar.index} className="py-3.5 first:pt-0 last:pb-0 space-y-1">
                       <div className="flex items-baseline gap-2.5">
                         <span className="font-mono text-xs text-emerald-700 dark:text-emerald-400 tabular-nums">
                           {pillar.index}.
@@ -227,7 +300,7 @@ export default function App() {
                 Products Built on GitHub
               </h2>
               <p className="mt-2 text-base text-slate-600 dark:text-slate-400 leading-relaxed">
-                Three end-to-end products from my GitHub profile. Switch through the landing page screenshots below, or click any product to open its full case study, live demo, repository, and FAQ in a new tab.
+                Three end-to-end products from my GitHub profile. Switch through the landing page screenshots below, or click any product to open its full case study, user personas, live demo, repository, and FAQ in a new tab.
               </p>
             </div>
 

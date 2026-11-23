@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Linkedin, Github, MapPin, Phone, ExternalLink } from 'lucide-react';
+import { Download, Mail, Linkedin, Github, MapPin, Phone, ExternalLink } from 'lucide-react';
 import { PROFILE } from '../data/portfolioData';
 
 export const ContactFooter: React.FC = () => {
@@ -30,6 +30,14 @@ export const ContactFooter: React.FC = () => {
           </div>
 
           <div className="flex flex-wrap items-center gap-3 shrink-0">
+            <a
+              href={PROFILE.resumeUrl}
+              download={PROFILE.resumeDownloadName}
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-emerald-600/40 dark:border-emerald-500/40 bg-emerald-50 dark:bg-emerald-500/10 hover:bg-emerald-100 dark:hover:bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 text-sm font-semibold transition-colors whitespace-nowrap shrink-0"
+            >
+              <Download className="w-4 h-4" />
+              <span>Download Resume</span>
+            </a>
             <a
               href={`mailto:${PROFILE.email}`}
               className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-slate-900 dark:bg-emerald-500 hover:bg-slate-800 dark:hover:bg-emerald-400 text-white dark:text-slate-950 text-sm font-semibold transition-colors whitespace-nowrap shrink-0"
@@ -65,6 +73,12 @@ export const ContactFooter: React.FC = () => {
             © {new Date().getFullYear()} {PROFILE.name}. Sourced from resume and GitHub repositories.
           </span>
           <div className="flex items-center gap-5">
+            <a href="?page=readme" className="hover:text-slate-900 dark:hover:text-emerald-400 transition-colors">
+              README
+            </a>
+            <a href={PROFILE.resumeUrl} download={PROFILE.resumeDownloadName} className="hover:text-slate-900 dark:hover:text-emerald-400 transition-colors">
+              Resume PDF
+            </a>
             <a href={PROFILE.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-slate-900 dark:hover:text-emerald-400 transition-colors">
               LinkedIn
             </a>

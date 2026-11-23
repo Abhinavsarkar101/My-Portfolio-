@@ -8,6 +8,7 @@ import {
   Layers,
   Cpu,
   HelpCircle,
+  Users,
 } from 'lucide-react';
 import { ProductItem, PROFILE } from '../data/portfolioData';
 import { ProductMockup } from './ProductMockup';
@@ -85,7 +86,7 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
         </div>
       </section>
 
-      {/* Landing Page Screenshots & Interactive Live Embed */}
+      {/* Landing Page Screenshots & Interactive Live Preview */}
       <section className="space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="flex items-center gap-2 text-sm font-semibold text-slate-900 dark:text-white">
@@ -180,6 +181,47 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
           <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
             {product.overview}
           </p>
+        </div>
+      </section>
+
+      {/* User Personas */}
+      <section className="space-y-6 pt-4 border-t border-slate-200 dark:border-white/[0.08]">
+        <div className="flex items-center gap-2">
+          <Users className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+          <h2 className="font-display text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+            User Personas
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {product.userPersonas.map((persona) => (
+            <div
+              key={persona.title}
+              className="rounded-xl border border-slate-200 dark:border-white/[0.08] bg-white dark:bg-[#0D131F] p-6 space-y-3"
+            >
+              <div className="flex items-center justify-between gap-2 text-xs font-mono">
+                <span className="text-emerald-700 dark:text-emerald-400 font-medium">
+                  {persona.segment}
+                </span>
+                <span className="text-slate-500 dark:text-slate-400">
+                  {persona.stage}
+                </span>
+              </div>
+              <h3 className="font-display text-lg font-semibold text-slate-900 dark:text-white">
+                {persona.title}
+              </h3>
+              <div className="space-y-2 text-sm leading-relaxed">
+                <p className="text-slate-600 dark:text-slate-300">
+                  <span className="font-semibold text-slate-900 dark:text-slate-100">Situation: </span>
+                  {persona.situation}
+                </p>
+                <p className="text-slate-600 dark:text-slate-400">
+                  <span className="font-semibold text-slate-800 dark:text-slate-200">How {product.name.split(' ')[0]} Helps: </span>
+                  {persona.howItHelps}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 

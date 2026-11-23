@@ -4,21 +4,23 @@ import { Moon, Sun, ArrowLeft } from 'lucide-react';
 interface NavbarProps {
   isDark: boolean;
   onToggleTheme: () => void;
-  isProjectPage?: boolean;
+  isSubPage?: boolean;
   onBackHome?: () => void;
+  onOpenReadme?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   isDark,
   onToggleTheme,
-  isProjectPage = false,
+  isSubPage = false,
   onBackHome,
+  onOpenReadme,
 }) => {
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/80 dark:border-white/[0.07] bg-[#F8FAFC]/90 dark:bg-[#060911]/85 backdrop-blur-md">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-8">
         {/* Zone 1: Single-line Brand Wordmark */}
-        {isProjectPage ? (
+        {isSubPage ? (
           <a
             href="?"
             onClick={(e) => {
@@ -41,8 +43,8 @@ export const Navbar: React.FC<NavbarProps> = ({
           </a>
         )}
 
-        {/* Zone 2: Clean single-line navigation links */}
-        {!isProjectPage && (
+        {/* Zone 2: Clean single-line navigation links (5 links) */}
+        {!isSubPage && (
           <nav
             aria-label="Primary navigation"
             className="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600 dark:text-slate-300"
@@ -66,10 +68,16 @@ export const Navbar: React.FC<NavbarProps> = ({
               Skills
             </a>
             <a
-              href="#credentials"
+              href="?page=readme"
+              onClick={(e) => {
+                if (onOpenReadme) {
+                  e.preventDefault();
+                  onOpenReadme();
+                }
+              }}
               className="hover:text-slate-900 dark:hover:text-emerald-400 transition-colors whitespace-nowrap shrink-0"
             >
-              Education
+              README
             </a>
             <a
               href="#contact"

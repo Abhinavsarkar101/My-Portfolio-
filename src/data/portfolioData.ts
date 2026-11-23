@@ -31,6 +31,14 @@ export interface ProductModule {
   details: string[];
 }
 
+export interface ProductPersona {
+  segment: string;
+  stage: string;
+  title: string;
+  situation: string;
+  howItHelps: string;
+}
+
 export interface ProductFAQ {
   question: string;
   answer: string;
@@ -56,6 +64,7 @@ export interface ProductItem {
   secondaryDemoUrl?: string;
   techStack: string[];
   keyHighlights: string[];
+  userPersonas: ProductPersona[];
   modules: ProductModule[];
   architectureSummary: string[];
   screens: ProductScreenSpec[];
@@ -70,6 +79,9 @@ export const PROFILE = {
   phone: '9630435371',
   linkedin: 'https://www.linkedin.com/in/abhinav-sarkar-product-manager/',
   github: 'https://github.com/Abhinavsarkar101',
+  headshotUrl: './assets/aistudio/linkedin-headshot_7e926260.jpg',
+  resumeUrl: './assets/aistudio/Abhinav_Sarkar_Product_Manager_Bangalore_2026.pdf_687a5a01.pdf',
+  resumeDownloadName: 'Abhinav_Sarkar_Product_Manager_Resume.pdf',
   typingPhrases: [
     'Hi, I am Abhinav.',
     'I am a Product Manager.',
@@ -84,7 +96,8 @@ export const DOMAIN_PILLARS = [
   {
     index: '01',
     title: 'Enterprise Telecom B2B',
-    detail: 'Owning DAM, DLPM & CRM across 6+ operators in Africa & Middle East, 100+ change requests, and 4 quarterly releases.',
+    detail:
+      'Owning Task Management, manual workflow creation, lead-to-onboarding product, and Customer Lifecycle product (CRM) across 6+ operators in Africa & Middle East, 100+ change requests, and 4 quarterly releases.',
   },
   {
     index: '02',
@@ -276,6 +289,44 @@ export const PRODUCTS: ProductItem[] = [
       'Precision Live Job Search (#jobs) with strict seniority, experience band, and 24h–30d freshness cutoffs',
       'Dual-mode authentication & persistence: Firebase Cloud Firestore + local SHA-256 / localStorage fallback',
     ],
+    userPersonas: [
+      {
+        segment: 'Persona 01',
+        stage: 'Term 1 Orientation',
+        title: 'The Engineer Pivoting into Product Management',
+        situation:
+          'Has 3 years of backend engineering experience at an IT firm and wants to transition into Tech Product Management, but is unsure whether their profile aligns more with PM or Management Consulting.',
+        howItHelps:
+          'Track A Diagnostic calibrates trade-off wiring toward Product & Tech, Resume Studio’s Google XYZ auditor converts technical bug-fix bullets into commercial metrics, and the deterministic ATS matcher benchmarks readiness against target PM job descriptions.',
+      },
+      {
+        segment: 'Persona 02',
+        stage: 'Summer Placements',
+        title: 'The Lateral Hire Targeting Strategy Consulting (MBB)',
+        situation:
+          'Joined business school with prior analytics experience and targets front-end strategy consulting at McKinsey or BCG, but needs structured case readiness and firm-specific interview intel.',
+        howItHelps:
+          'Track D Role Readiness scores problem-structuring strengths into a 90-day sprint, Company Prep outlines McKinsey/BCG round formats, and People Map surfaces alumni Engagement Managers for mock case prep.',
+      },
+      {
+        segment: 'Persona 03',
+        stage: 'Pre-Placement Offers',
+        title: 'The Dual-Specialization Conflict (Marketing vs. Finance)',
+        situation:
+          'Enjoys consumer brand psychology while scoring well in quantitative finance courses, creating hesitation on elective bidding and day-zero shortlist priorities.',
+        howItHelps:
+          'Track B Diagnostic stress-tests preferences through forced workplace dilemmas across analytical, creative, and risk dimensions to validate the strongest post-MBA track.',
+      },
+      {
+        segment: 'Persona 04',
+        stage: 'Off-Campus & Lateral Hiring',
+        title: 'The High-Conversion LinkedIn Outreach Candidate',
+        situation:
+          'Targets growth and operations leadership roles at high-growth startups and needs direct outreach to hiring leaders rather than relying solely on passive job boards.',
+        howItHelps:
+          'People Map generates Boolean LinkedIn queries for B-school alumni and hiring managers paired with calibrated 3-step cold outreach templates and Precision Live Job Search (#jobs) with 24h freshness filters.',
+      },
+    ],
     modules: [
       {
         title: 'Executive Candidate Dashboard',
@@ -413,6 +464,44 @@ export const PRODUCTS: ProductItem[] = [
       'Automated gap-closing micro-survey builder with live public respondent URLs (/#survey-:id) and webhook email dispatch',
       'Boardroom executive reports with Impact vs. Effort priority matrix, Markdown export, and vector PDF download',
     ],
+    userPersonas: [
+      {
+        segment: 'Persona 01',
+        stage: 'Founder / Executive',
+        title: 'Early-Stage Founders Wearing Multiple Hats',
+        situation:
+          'Lack time to manually read 500+ fragmented support tickets, app reviews, and founder WhatsApp notes, risking missed critical bugs and silent retention drops.',
+        howItHelps:
+          'Ingests multi-channel feedback, surfaces urgent churn signals and retention risk summaries, and generates concise boardroom briefings.',
+      },
+      {
+        segment: 'Persona 02',
+        stage: 'Product Manager / Designer',
+        title: 'Product Managers Justifying Roadmap Priorities',
+        situation:
+          'Need verifiable metric backing and traceable evidence before committing engineering sprints or defending feature prioritization to stakeholders.',
+        howItHelps:
+          'Maps recurring friction themes onto an Impact vs. Effort priority matrix where every recommendation links directly back to verbatim customer quotes and ticket IDs.',
+      },
+      {
+        segment: 'Persona 03',
+        stage: 'Customer Success & Support Lead',
+        title: 'Customer Success Teams Preventing Enterprise Churn',
+        situation:
+          'Need early visibility into CSAT drops, recurring onboarding complaints, and cancellation threats across helpdesk logs before contract renewals.',
+        howItHelps:
+          'Clusters support tickets with automated hygiene filtering, highlights urgent churn flags, and triggers targeted gap-closing micro-surveys.',
+      },
+      {
+        segment: 'Persona 04',
+        stage: 'User Researcher / Data Analyst',
+        title: 'UX Researchers Validating Research Sufficiency',
+        situation:
+          'Struggle with knowing when qualitative interviews and CSV evidence are statistically and contextually sufficient versus needing another research round.',
+        howItHelps:
+          'Triangulates CSVs, call transcripts, and UI heatmaps through the 3-Tier Sufficiency Engine (Sufficient, Knowledge Gap, or Insufficient) and builds targeted gap-closing surveys only when needed.',
+      },
+    ],
     modules: [
       {
         title: 'Role-Adaptive Dashboard & Onboarding',
@@ -548,6 +637,35 @@ export const PRODUCTS: ProductItem[] = [
       'Custom inline SVG diagram engine (step-by-step trees & flows) + real product case studies + flashcards',
       '90 chapter questions (10 per chapter across multiple-choice, multi-select, true/false, short answer) with an 80% chapter pass gate',
       'After-Course Interview Preparation across 12 PM categories with timed mock interviews, sample answers, and self-scoring rubrics',
+    ],
+    userPersonas: [
+      {
+        segment: 'Persona 01',
+        stage: 'Complete Beginner',
+        title: 'First-Time PM Learners Without Prior Background',
+        situation:
+          'Have used everyday apps like food delivery, payments, and streaming, and want to understand how product management works without expensive cohorts or dense jargon.',
+        howItHelps:
+          'Teaches PM fundamentals from scratch in plain English across 9 progressive chapters with zero sign-up, zero payment, inline SVG diagrams, and worked real-world examples.',
+      },
+      {
+        segment: 'Persona 02',
+        stage: 'Job & Interview Prep',
+        title: 'Aspiring APMs & MBA / College Candidates',
+        situation:
+          'Need structured preparation for technical, analytical, and product-sense PM interviews including SQL, A/B testing, metrics, pricing, and Gen AI.',
+        howItHelps:
+          'Enforces comprehension with 90 chapter quiz questions (80% pass threshold) and unlocks After-Course Interview Prep across 12 PM categories with timed mocks and self-scoring rubrics.',
+      },
+      {
+        segment: 'Persona 03',
+        stage: 'Self-Paced Daily Learner',
+        title: 'Mobile & Cross-Device Self-Learners',
+        situation:
+          'Prefer studying in short daily sessions on phone, tablet, or laptop—including at night—while keeping track of revision notes and weak topics.',
+        howItHelps:
+          'Provides a responsive layout with mobile bottom tabbar, night mode, local lesson notes, weakest-topic revision queues, XP, daily streaks, and 16 unlockable badges stored locally.',
+      },
     ],
     modules: [
       {

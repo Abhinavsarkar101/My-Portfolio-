@@ -58,8 +58,8 @@ Every product description, module breakdown, link, and FAQ in this portfolio is 
 
 ## Portfolio Architecture & Features
 
-- **Typing Hero Headline:** Typewriter-style cycling headline highlighting Abhinav's PM identity while keeping body copy cleanly readable.
-- **New-Tab Project Detail Pages (`?project=<slug>`):** Clicking any of the 3 products opens a dedicated project detail view in a new tab with multi-screen UI previews, an interactive live embed tab, complete module & architecture breakdown, direct GitHub/Demo links, and a product-specific FAQ accordion.
+- **Typing Hero Headline, Headshot & Resume Download:** Typewriter-style cycling headline paired with Abhinav's portrait, core product pillars, and direct one-click **Download Resume** PDF button.
+- **New-Tab Project Detail Pages (`?project=<slug>`):** Clicking any of the 3 products opens a dedicated project detail view in a new tab with 4 landing page UI screens, an interactive live embed tab, target **User Personas**, complete module & architecture breakdown, direct GitHub/Demo links, and a product-specific FAQ accordion.
 - **Categorized Skills Grid:** 3-column dark-slate category grid showcasing the 27 skills listed on Abhinav's resume, paired with a Light/Dark theme toggle in the top navigation bar.
 - **Complete Resume Sections:** Work Experience (Tecnotree Corporation & Shoppz.co), Hackathon Recognition, Education, Certifications, Languages, and Contact details.
 
