@@ -51,7 +51,7 @@ export const TypingHeadline: React.FC<TypingHeadlineProps> = ({ phrases }) => {
     : phrases[phraseIndex].slice(0, charIndex);
 
   return (
-    <h1 className="font-typing text-2xl sm:text-4xl lg:text-[2.65rem] font-semibold tracking-tight text-slate-900 dark:text-white leading-[1.2] min-h-[3.2em] sm:min-h-[2.6em] text-balance">
+    <h1 className="font-typing text-3xl sm:text-4xl lg:text-[2.85rem] font-bold tracking-tight text-slate-900 dark:text-white leading-[1.15] min-h-[2.6em] sm:min-h-[2.4em] text-balance">
       <span>{activeText}</span>
       {!prefersReducedMotion && (
         <span

@@ -4,7 +4,7 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { ArrowDownRight, Download, Github, Linkedin, Mail } from 'lucide-react';
+import { Download, Github, Linkedin, Mail } from 'lucide-react';
 import { DOMAIN_PILLARS, KEY_HIGHLIGHTS, PRODUCTS, PROFILE } from './data/portfolioData';
 import { Navbar } from './components/Navbar';
 import { TypingHeadline } from './components/TypingHeadline';
@@ -148,7 +148,7 @@ export default function App() {
       />
 
       <main>
-        {/* Executive Hero Split with Headshot, Typing Headline & Downloadable Resume */}
+        {/* Hero Split matching reference: Role/City Pill + Typing Headline + Summary + Actions on Left, Large Circular Portrait on Right */}
         <section className="relative overflow-hidden py-14 sm:py-20 lg:py-24 bg-architectural-grid">
           <div
             aria-hidden="true"
@@ -156,61 +156,50 @@ export default function App() {
           />
 
           <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-stretch">
-              {/* Left Column: Kicker, Typing Headline, Summary & CTAs */}
-              <div className="lg:col-span-7 flex flex-col justify-between space-y-6">
-                <div className="space-y-5">
-                  <div className="text-xs sm:text-sm font-medium text-emerald-700 dark:text-emerald-400">
-                    <span>{PROFILE.role}</span>
-                    <span className="mx-2 text-slate-400 dark:text-slate-600" aria-hidden="true">·</span>
-                    <span className="text-slate-600 dark:text-slate-300">{PROFILE.location}</span>
-                  </div>
-
-                  {/* Typing-style headline strictly on the headline */}
-                  <TypingHeadline phrases={PROFILE.typingPhrases} />
-
-                  <p className="text-base sm:text-[17px] text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
-                    {PROFILE.summary}
-                  </p>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+              {/* Left Column: Badge, Typing Headline, Bio & Buttons */}
+              <div className="lg:col-span-8 space-y-6">
+                <div className="inline-flex items-center rounded-full border border-emerald-500/30 bg-emerald-500/10 dark:bg-emerald-500/10 px-4 py-1.5 text-xs sm:text-sm font-medium text-emerald-700 dark:text-emerald-300">
+                  {PROFILE.role} · Bengaluru
                 </div>
+
+                {/* Typing-style headline strictly on the headline */}
+                <TypingHeadline phrases={PROFILE.typingPhrases} />
+
+                <p className="text-base sm:text-[17px] text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
+                  {PROFILE.summary}
+                </p>
 
                 <div className="pt-2 flex flex-wrap items-center gap-3">
                   <a
-                    href="#projects"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-slate-900 dark:bg-emerald-500 hover:bg-slate-800 dark:hover:bg-emerald-400 text-white dark:text-slate-950 text-sm font-semibold transition-colors whitespace-nowrap shrink-0"
-                  >
-                    <span>Explore 3 Shipped Products</span>
-                    <ArrowDownRight className="w-4 h-4" />
-                  </a>
-                  <a
                     href={PROFILE.resumeUrl}
                     download={PROFILE.resumeDownloadName}
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-emerald-600/40 dark:border-emerald-500/40 bg-emerald-50 dark:bg-emerald-500/10 hover:bg-emerald-100 dark:hover:bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 text-sm font-semibold transition-colors whitespace-nowrap shrink-0"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 dark:bg-emerald-500 hover:bg-slate-800 dark:hover:bg-emerald-400 text-white dark:text-slate-950 text-sm font-semibold transition-colors whitespace-nowrap shrink-0"
                   >
                     <Download className="w-4 h-4" />
-                    <span>Download Resume</span>
-                  </a>
-                  <a
-                    href={PROFILE.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-slate-200 dark:border-white/[0.1] bg-white dark:bg-[#0D131F] hover:bg-slate-100 dark:hover:bg-[#141D2F] text-slate-800 dark:text-slate-100 text-sm font-medium transition-colors whitespace-nowrap shrink-0"
-                  >
-                    <Github className="w-4 h-4" />
-                    <span>GitHub</span>
+                    <span>Resume (PDF)</span>
                   </a>
                   <a
                     href={PROFILE.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-slate-200 dark:border-white/[0.1] bg-white dark:bg-[#0D131F] hover:bg-slate-100 dark:hover:bg-[#141D2F] text-slate-800 dark:text-slate-100 text-sm font-medium transition-colors whitespace-nowrap shrink-0"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-200 dark:border-white/[0.1] bg-white dark:bg-[#0D131F] hover:bg-slate-100 dark:hover:bg-[#141D2F] text-slate-800 dark:text-slate-100 text-sm font-medium transition-colors whitespace-nowrap shrink-0"
                   >
                     <Linkedin className="w-4 h-4" />
                     <span>LinkedIn</span>
                   </a>
                   <a
+                    href={PROFILE.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-200 dark:border-white/[0.1] bg-white dark:bg-[#0D131F] hover:bg-slate-100 dark:hover:bg-[#141D2F] text-slate-800 dark:text-slate-100 text-sm font-medium transition-colors whitespace-nowrap shrink-0"
+                  >
+                    <Github className="w-4 h-4" />
+                    <span>GitHub</span>
+                  </a>
+                  <a
                     href={`mailto:${PROFILE.email}`}
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-slate-200 dark:border-white/[0.1] bg-white dark:bg-[#0D131F] hover:bg-slate-100 dark:hover:bg-[#141D2F] text-slate-800 dark:text-slate-100 text-sm font-medium transition-colors whitespace-nowrap shrink-0"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-200 dark:border-white/[0.1] bg-white dark:bg-[#0D131F] hover:bg-slate-100 dark:hover:bg-[#141D2F] text-slate-800 dark:text-slate-100 text-sm font-medium transition-colors whitespace-nowrap shrink-0"
                   >
                     <Mail className="w-4 h-4" />
                     <span>Email</span>
@@ -218,60 +207,53 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Right Column: Profile Headshot + Core Product Pillars */}
-              <div className="lg:col-span-5 rounded-2xl border border-slate-200 dark:border-white/[0.08] bg-white/95 dark:bg-[#0D131F]/95 dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] p-6 sm:p-7 flex flex-col justify-between gap-5">
-                <div className="flex items-center gap-4 pb-5 border-b border-slate-200 dark:border-white/[0.06]">
+              {/* Right Column: Prominent Circular Portrait matching reference layout */}
+              <div className="lg:col-span-4 flex justify-center lg:justify-end">
+                <div className="relative w-56 h-56 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-full p-1.5 bg-gradient-to-b from-slate-200 to-slate-300 dark:from-white/[0.16] dark:to-white/[0.04] shadow-2xl">
                   {headshotError ? (
                     <div
                       aria-label={PROFILE.name}
-                      className="w-20 h-20 rounded-xl bg-slate-200 dark:bg-[#151E30] border border-slate-300 dark:border-white/10 flex items-center justify-center font-display text-xl font-bold text-slate-700 dark:text-emerald-400 shrink-0"
+                      className="w-full h-full rounded-full bg-slate-200 dark:bg-[#0D131F] flex items-center justify-center font-display text-4xl font-bold text-slate-700 dark:text-emerald-400"
                     >
                       AS
                     </div>
                   ) : (
                     <img
                       src={PROFILE.headshotUrl}
-                      alt={`${PROFILE.name} headshot`}
+                      alt={`${PROFILE.name} portrait`}
                       referrerPolicy="no-referrer"
                       onError={() => setHeadshotError(true)}
-                      className="w-20 h-20 rounded-xl object-cover object-top border border-slate-200 dark:border-white/[0.12] shrink-0"
+                      className="w-full h-full rounded-full object-cover object-top bg-[#0D131F]"
                     />
                   )}
-                  <div className="min-w-0">
-                    <div className="font-display text-lg font-bold text-slate-900 dark:text-white truncate">
-                      {PROFILE.name}
-                    </div>
-                    <div className="text-xs sm:text-sm font-medium text-emerald-700 dark:text-emerald-400 mt-0.5">
-                      {PROFILE.role}
-                    </div>
-                    <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                      {PROFILE.location}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="divide-y divide-slate-200 dark:divide-white/[0.06] flex-1 flex flex-col justify-center">
-                  {DOMAIN_PILLARS.map((pillar) => (
-                    <div key={pillar.index} className="py-3.5 first:pt-0 last:pb-0 space-y-1">
-                      <div className="flex items-baseline gap-2.5">
-                        <span className="font-mono text-xs text-emerald-700 dark:text-emerald-400 tabular-nums">
-                          {pillar.index}.
-                        </span>
-                        <h2 className="font-display text-sm sm:text-base font-semibold text-slate-900 dark:text-white">
-                          {pillar.title}
-                        </h2>
-                      </div>
-                      <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed pl-6">
-                        {pillar.detail}
-                      </p>
-                    </div>
-                  ))}
                 </div>
               </div>
             </div>
 
+            {/* 3-Column Core Product Pillars */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 border-t border-slate-200 dark:border-white/[0.08]">
+              {DOMAIN_PILLARS.map((pillar) => (
+                <div
+                  key={pillar.index}
+                  className="rounded-2xl border border-slate-200 dark:border-white/[0.08] bg-white/95 dark:bg-[#0D131F]/95 dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] p-5 space-y-1.5"
+                >
+                  <div className="flex items-baseline gap-2">
+                    <span className="font-mono text-xs text-emerald-700 dark:text-emerald-400 tabular-nums">
+                      {pillar.index}.
+                    </span>
+                    <h2 className="font-display text-sm sm:text-base font-semibold text-slate-900 dark:text-white">
+                      {pillar.title}
+                    </h2>
+                  </div>
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                    {pillar.detail}
+                  </p>
+                </div>
+              ))}
+            </div>
+
             {/* Full-width 4-column Proof Row */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 pt-6 border-t border-slate-200 dark:border-white/[0.08]">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
               {KEY_HIGHLIGHTS.map((item) => (
                 <div
                   key={item.label}
