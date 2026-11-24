@@ -14,6 +14,7 @@ import { ExperienceSection } from './components/ExperienceSection';
 import { SkillsSection } from './components/SkillsSection';
 import { CredentialsSection } from './components/CredentialsSection';
 import { ContactFooter } from './components/ContactFooter';
+import { ScrollProgressButton } from './components/ScrollProgressButton';
 
 function getProjectSlugFromUrl(): string | null {
   const params = new URLSearchParams(window.location.search);
@@ -99,6 +100,7 @@ export default function App() {
         />
         <ProjectDetailPage product={selectedProduct} onBackHome={handleBackHome} />
         <ContactFooter />
+        <ScrollProgressButton routeKey={selectedProduct.slug} />
       </div>
     );
   }
@@ -271,6 +273,7 @@ export default function App() {
       </main>
 
       <ContactFooter />
+      <ScrollProgressButton routeKey="home" />
     </div>
   );
 }
